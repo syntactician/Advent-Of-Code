@@ -9,3 +9,11 @@ edgesToPaper <- function(x) {
 }
 
 totalPaper <- sum(unlist(lapply(input, edgesToPaper)))
+
+edgesToRibbon <- function(x) {
+    sort(x) -> s # sides
+    
+    prod(x) + 2 * (s[1] + s[2])
+}
+
+totalRibbon <- sum(unlist(lapply(input, edgesToRibbon)))
