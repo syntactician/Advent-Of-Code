@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-input <- readLines('5.txt')
+input <- readLines('../5.txt')
 
 vowels <- '(.*[aeiou]){3}'
 substrings <- '(ab|cd|pq|xy)'
