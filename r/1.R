@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-suppressMessages(require(readr))
+library(readr)
 
 input <- read_file("../1.txt")
 

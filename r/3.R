@@ -1,7 +1,8 @@
 #!/usr/bin/env Rscript
 
-suppressMessages(require(mgcv))
-suppressMessages(require(readr))
+# mgcv loads noisily
+suppressMessages(library(mgcv))
+library(readr)
 
 input <- head(unlist(strsplit(read_file('../3.txt'), '')), -1)
 
@@ -35,4 +36,3 @@ bothPositions <- rbind(realPositions, roboPositions)
 bothUniquePositions <- uniquecombs(bothPositions)
 
 bothUniqueHouses <- nrow(bothUniquePositions)
-bothUniqueHouses

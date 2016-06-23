@@ -1,10 +1,10 @@
 #!/usr/bin/env Rscript
 
-suppressMessages(require(digest))
+library(digest)
 
 input <- 'ckczppom'
 
-mine <- function(x, length) substr(digest(x, algo='md5', serialize=FALSE), 1, length)
+mine <- function(x, length) substr(digest(x, algo = 'md5', serialize = FALSE), 1, length)
 
 sift <- function(x, prefix) {
     length <- nchar(prefix)
