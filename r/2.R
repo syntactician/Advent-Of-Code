@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-input <- lapply(strsplit(readLines("2.txt"), 'x'), strtoi)
+input <- lapply(strsplit(readLines("../2.txt"), 'x'), strtoi)
 
 edgesToPaper <- function(x) {
     sort(x) -> s #sides
