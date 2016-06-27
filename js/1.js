@@ -1,33 +1,27 @@
 #!/usr/bin/env node
-
 'use strict'
 
 const fs = require('fs')
 
-function parse (str) {
-  return str.split('')
-    .map((c) => c === '(' ? 1 : c === ')' ? -1 : 0)
-}
+const parse = (str) => str.split('')
+  .map((c) => c === '(' ? 1 : c === ')' ? -1 : 0)
 
-function sideA (arr) {
-  return arr.reduce((a, b) => a + b)
-}
+const sideA = (arr) => arr.reduce((a, b) => a + b)
 
-function sideB (arr) {
-  let floor = 0
-  for (let i = 0; i < arr.length; ++i) {
+const sideB = (arr) => {
+  for (let floor = 0, i = 0; i < arr.length; floor += arr[i], ++i) {
     if (floor < 0) {
       return i
     }
-    floor += arr[i]
   }
 }
 
-function main () {
+const main = () => {
   const contents = fs.readFileSync('../1.txt', 'utf8')
   const input = parse(contents)
   console.log(sideA(input))
   console.log(sideB(input))
+  return
 }
 
 main()

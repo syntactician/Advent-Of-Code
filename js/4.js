@@ -1,40 +1,29 @@
 #!/usr/bin/env node
-
 'use strict'
 
-const hash = require('md5')
+const md5 = require('md5')
 const fs = require('fs')
 
-function parse (str) {
-  return str.slice(0, -1)
-}
+const parse = (str) => str.slice(0, -1)
 
-function mine (vein, test) {
-  const length = test.length
-
-  function sift (x) {
-    return hash(x).slice(0, length)
-  }
+const shared = (input, test) => {
+  const hash = (str) => md5(str).slice(0, test.length)
   let i = 0
-
-  for (let ore = sift(vein); ore != test; ore = sift(vein + i), ++i)
+  for (; hash(input + i) != test; ++i)
     continue
   return i - 1
 }
 
-function sideA (str) {
-  return mine(str, '00000')
-}
+const sideA = (str) => shared(str, '00000')
 
-function sideB (str) {
-  return mine(str, '000000')
-}
+const sideB = (str) => shared(str, '000000')
 
-function main () {
+const main = () => {
   const contents = fs.readFileSync('../4.txt', 'utf8')
   const input = parse(contents)
   console.log(sideA(input))
   console.log(sideB(input))
+  return
 }
 
 main()
