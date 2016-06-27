@@ -2,10 +2,9 @@
 
 'use strict'
 
-const Promise = require('bluebird')
-const fs = Promise.promisifyAll(require('fs'))
+const fs = require('fs')
 
-function preprocess (str) {
+function parse (str) {
   return str.split('\n')
     .filter(x => x.length > 0)
     .map(function (y) {
@@ -77,13 +76,10 @@ function sideB (arr) {
 }
 
 function main () {
-  fs.readFileAsync('../6.txt', 'utf8').then(function (contents) {
-    const instructions = preprocess(contents)
-    console.log(sideA(instructions))
-    console.log(sideB(instructions))
-  }).catch(function (e) {
-    console.error(e.stack)
-  })
+  const contents = fs.readFileSync('../6.txt', 'utf8')
+  const input = parse(contents)
+  console.log(sideA(input))
+  console.log(sideB(input))
 }
 
 main()
