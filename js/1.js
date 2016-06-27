@@ -11,15 +11,14 @@ function preprocess (str) {
 }
 
 function sideA (arr) {
-  console.log(arr.reduce((a, b) => a + b))
+  return arr.reduce((a, b) => a + b)
 }
 
 function sideB (arr) {
   let floor = 0
   for (let i = 0; i < arr.length; ++i) {
     if (floor < 0) {
-      console.log(i)
-      return
+      return i
     }
     floor += arr[i]
   }
