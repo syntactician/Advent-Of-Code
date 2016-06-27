@@ -13,7 +13,6 @@ const sideA = (arr) => arr.filter((str) => {
   return str.match(vowels) && !str.match(substrings) && str.match(doubleLetter)
 }).length
 
-// function sideB (arr) {
 const sideB = (arr) => arr.filter((str) => {
   const pair = /(..).*\1/
   const repeater = /(.).\1/
