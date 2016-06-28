@@ -20,8 +20,8 @@ const parse = (str) => str.split('\n')
     }
   })
 
-const sideA = (arr) => arr
-  .reduce((grid, instruction) => {
+const sideA = (arr) => {
+  const followInstruction = (grid, instruction) => {
     for (let x = instruction.start.x; x <= instruction.end.x; ++x) {
       for (let y = instruction.start.y; y <= instruction.end.y; ++y) {
         if (grid[x] === undefined) grid[x] = []
@@ -40,11 +40,14 @@ const sideA = (arr) => arr
       }
     }
     return grid
-  }, [])
-  .reduce((count, row) => count + row.filter(x => x).length, 0)
+  }
 
-const sideB = (arr) => arr
-  .reduce((grid, instruction) => {
+  return arr.reduce(followInstruction, [])
+    .reduce((count, row) => count + row.filter(x => x).length, 0)
+}
+
+const sideB = (arr) => {
+  const followInstruction = (grid, instruction) => {
     for (let x = instruction.start.x; x <= instruction.end.x; ++x) {
       for (let y = instruction.start.y; y <= instruction.end.y; ++y) {
         if (grid[x] === undefined) grid[x] = []
@@ -63,8 +66,11 @@ const sideB = (arr) => arr
       }
     }
     return grid
-  }, [])
-  .reduce((sum, row) => sum + row.reduce((a, b) => a + (b || 0)), 0)
+  }
+
+  return arr.reduce(followInstruction, [])
+    .reduce((sum, row) => sum + row.reduce((a, b) => a + (b || 0)), 0)
+}
 
 const main = () => {
   const contents = fs.readFileSync('../6.txt', 'utf8')
