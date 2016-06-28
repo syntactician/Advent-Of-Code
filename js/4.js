@@ -10,8 +10,7 @@ const mine = (input, test) => {
   const hash = (str) => md5(str).slice(0, test.length)
 
   let i = 0
-  for (; hash(input + i) != test; ++i)
-    continue
+  for (; hash(input + i) !== test; ++i) {}
   return i
 }
 
