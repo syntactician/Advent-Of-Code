@@ -11,7 +11,7 @@ const shared = (input, test) => {
   let i = 0
   for (; hash(input + i) != test; ++i)
     continue
-  return i - 1
+  return i
 }
 
 const sideA = (str) => shared(str, '00000')
