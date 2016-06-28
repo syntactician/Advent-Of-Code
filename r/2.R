@@ -1,19 +1,32 @@
 #!/usr/bin/env Rscript
 
-input <- lapply(strsplit(readLines("../2.txt"), 'x'), strtoi)
-
-edgesToPaper <- function(x) {
-    sort(x) -> s #sides
-    # 3 of the smallest side, 2 of each other
-    (3 * s[1] * s[2]) + (2 * s[2] * s[3]) + (2 * s[3] * s[1])
+parse <- function(rows) {
+    lapply(strsplit(rows, 'x'), strtoi)
 }
 
-totalPaper <- sum(unlist(lapply(input, edgesToPaper)))
+sideA <- function(input) {
+    wrap <- function(dims) {
+        d <- sort(dims)
+        3 * d[1] * d[2] + 2 * d[2] * d[3] + 2 * d[3] * d[1]
+    }
 
-edgesToRibbon <- function(x) {
-    sort(x) -> s # sides
-    
-    prod(x) + 2 * (s[1] + s[2])
+    sum(unlist(lapply(input, wrap)))
 }
 
-totalRibbon <- sum(unlist(lapply(input, edgesToRibbon)))
+sideB <- function(input) {
+    tie <- function(dims) {
+        d <- sort(dims)
+        prod(d) + 2 * (d[1] + d[2])
+    }
+
+    sum(unlist(lapply(input, tie)))
+}
+
+main <- function() {
+    contents <- readLines("../2.txt")
+    input <- parse(contents)
+    cat(sideA(input), "\n")
+    cat(sideB(input), "\n")
+}
+
+main()

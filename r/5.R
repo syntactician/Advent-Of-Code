@@ -1,19 +1,32 @@
 #!/usr/bin/env Rscript
 
-input <- readLines('../5.txt')
+sideA <- function(input) {
+    isNice <- function(str) {
+        vowels <- '(.*[aeiou]){3}'
+        substrings <- '(ab|cd|pq|xy)'
+        doubleLetter <- '(.)\\1'
 
-vowels <- '(.*[aeiou]){3}'
-substrings <- '(ab|cd|pq|xy)'
-doubleLetter <- '(.)\\1'
+        grepl(vowels, str) & !grepl(substrings, str) & grepl(doubleLetter, str)
+    }
 
-isNice <- function(x) (grepl(vowels, x) & !grepl(substrings, x) & grepl(doubleLetter, x))
+    sum(isNice(input))
+}
 
-niceStrings <- sum(isNice(input))
+sideB <- function(input) {
+    isNice <- function(str) {
+        pair <- '(..).*\\1'
+        repeater = '(.).\\1'
 
+        grepl(pair, str, perl = TRUE) & grepl(repeater, str)
+    }
 
-pair <- '(..).*\\1'
-repeater <- '(.).\\1'
+    sum(isNice(input))
+}
 
-isReallyNice <- function(x) (grepl(pair, x, perl = TRUE) & grepl(repeater, x))
+main <- function() {
+    input <- readLines('../5.txt')
+    cat(sideA(input), '\n')
+    cat(sideB(input), '\n')
+}
 
-niceStrings <- sum(isReallyNice(input))
+main()

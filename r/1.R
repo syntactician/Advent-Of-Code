@@ -2,10 +2,21 @@
 
 library(readr)
 
-input <- read_file("../1.txt")
+parse <- function(str) {
+    ifelse(head(unlist(strsplit(str, "")), -1) == '(', 1, -1)
+}
 
-inputVector <- head(unlist(strsplit(input, '')), -1) # remove trailing newline
-floorChanges <- ifelse(inputVector == '(', 1, -1)
+sideA <- sum
 
-endingFloor <- sum(floorChanges) # 1.1
-firstBasement <- min(which(cumsum(floorChanges) == -1)) # 1.2
+sideB <- function(num) {
+    min(which(cumsum(num) == -1))
+}
+
+main <- function() {
+    contents <- read_file("../1.txt")
+    input <- parse(contents)
+    cat(sideA(input), "\n")
+    cat(sideB(input), "\n")
+}
+
+main()

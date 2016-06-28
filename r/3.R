@@ -4,35 +4,37 @@
 suppressMessages(library(mgcv))
 library(readr)
 
-input <- head(unlist(strsplit(read_file('../3.txt'), '')), -1)
+parse <- function(str) {
+    raw.contents <- head(unlist(strsplit(str, '')), -1)
 
-north <- c( 0,  1)
-east  <- c( 1,  0)
-south <- c( 0, -1)
-west  <- c(-1,  0)
+    n <- c(0, 1)
+    e <- c(1, 0)
+    s <- c(0, -1)
+    w <- c(-1, 0)
 
-directions <- list(north, east, south, west)[ match(input, c('^', '>', 'v', '<')) ]
+    contents.list <- list(n, e, s, w)[match(raw.contents, c('^', '>', 'v', '<'))]
+    do.call(rbind, contents.list)
+}
 
-movements <- do.call(rbind, directions)
+sideA <- function(input) {
+    nrow(uniquecombs(cbind(cumsum(input[,1]), cumsum(input[,2]))))
+}
 
-positions <- cbind(cumsum(movements[,1]), cumsum(movements[,2]))
-uniquePositions <- uniquecombs(positions)
+sideB <- function(input) {
+    anthro.input <- input[c(TRUE, FALSE),]
+    robo.input <- input[c(FALSE, TRUE),]
 
-uniqueHouses <- nrow(uniquePositions)
+    anthro.positions <- cbind(cumsum(anthro.input[,1]), cumsum(anthro.input[,2]))
+    robo.positions <- cbind(cumsum(robo.input[,1]), cumsum(robo.input[,2]))
 
-# 3.2
+    nrow(uniquecombs(rbind(anthro.positions, robo.positions)))
+}
 
-realDirections <- directions[c(TRUE, FALSE)]
-roboDirections <- directions[c(FALSE, TRUE)]
+main <- function() {
+    contents <- read_file('../3.txt')
+    input <- parse(contents)
+    cat(sideA(input), '\n')
+    cat(sideB(input), '\n')
+}
 
-realMovements <- do.call(rbind, realDirections)
-roboMovements <- do.call(rbind, roboDirections)
-
-realPositions <- cbind(cumsum(realMovements[,1]), cumsum(realMovements[,2]))
-roboPositions <- cbind(cumsum(roboMovements[,1]), cumsum(roboMovements[,2]))
-
-bothPositions <- rbind(realPositions, roboPositions)
-    
-bothUniquePositions <- uniquecombs(bothPositions)
-
-bothUniqueHouses <- nrow(bothUniquePositions)
+main()
