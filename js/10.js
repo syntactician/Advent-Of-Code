@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 'use strict'
 
-const fs = require('fs')
-
 const rle = (str) => str
   .replace(/(.)\1*/g, (seq, pl) => seq.length.toString() + pl)
 
