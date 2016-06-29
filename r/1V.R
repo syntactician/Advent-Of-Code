@@ -4,14 +4,16 @@ library(ggplot2)
 library(readr)
 
 parse <- function(str) {
-  flights <- ifelse(head(unlist(strsplit(str, '')), -1) == '(', 1, -1)
+  flights <- append(ifelse(head(unlist(strsplit(str, '')), -1) == '(',
+                           1, -1),
+                    0, 0)
   data.frame(x = 1:length(flights), y = cumsum(flights))
 }
 
 visualize <- function(input) {
-    ggplot(data = input) +
-        geom_line(aes(x = x, y = y), color = '#C21717') +
+  ggplot(data = input) +
     geom_hline(yintercept = 0, color = '#3C8D0D') +
+    geom_line(aes(x = x, y = y), color = '#C21717') +
     theme( axis.line = element_blank(),
            axis.text.x = element_blank(),
            axis.text.y = element_blank(),
