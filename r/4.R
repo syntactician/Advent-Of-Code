@@ -5,9 +5,9 @@ library(digest)
 mine <- function(input, test) {
   length <- nchar(test)
   getHash <- function(x) {
-    substr(digest(paste(input, x, sep = ''),
+    substr(digest(paste0(input, x, sep = ''),
                   algo = 'md5', serialize = FALSE),
-           1, length)
+           length)
   }
 
   i <- 1

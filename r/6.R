@@ -5,7 +5,7 @@ parse <- function(contents) {
     words <- unlist(strsplit(line, ' '))
 
     if (words[1] == 'turn') {
-      instruction <- paste(words[1], words[2], sep = '')
+      instruction <- paste0(words[1], words[2])
       optind <- 3
     } else {
       instruction <- words[1]
