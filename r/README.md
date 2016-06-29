@@ -18,3 +18,11 @@ A heatmap of houses Santa visits:
 
 A heatmap of Santa's and Robo-Santa's visits:
 ![robo-santa-houses](3b.png)
+
+#### Day 6: Probably a Fire Hazard
+
+The winning yard, per Santa's instructions:
+![santa-toggle-lights](6a.png)
+
+The winning yard, per Santa's (properly translated) instructions:
+![santa-dimmer-lights](6b.png)
