@@ -17,13 +17,11 @@ parse <- function(str) {
 }
 
 side.a <- function(input) {
-  cbind(cumsum(input[,1]), cumsum(input[,2]))
+  data.frame(x = cumsum(input[,1]), y = cumsum(input[,2]))
 }
 
 visualize.a <- function(output) {
-  positions <- data.frame(x = output[,1], y = output[,2])
-  
-  ggplot(data = positions) +
+  ggplot(data = output) +
     geom_point(size = 1, alpha = 1/3, color = '#C21717',
                aes(x = x, y = y)) +
     guides(color = 'none') +
@@ -46,22 +44,18 @@ side.b <- function(input) {
   anthro.input <- input[c(TRUE, FALSE),]
   robo.input <- input[c(FALSE, TRUE),]
 
-  anthro.positions <- cbind(cumsum(anthro.input[,1]),
-                            cumsum(anthro.input[,2]),
-                            0)
-  robo.positions <- cbind(cumsum(robo.input[,1]),
-                          cumsum(robo.input[,2]),
-                          1)
+  anthro.positions <- data.frame(x = cumsum(anthro.input[,1]),
+                                 y = cumsum(anthro.input[,2]),
+                                 santa = 'Santa')
+  robo.positions <- data.frame(x = cumsum(robo.input[,1]),
+                               y = cumsum(robo.input[,2]),
+                               santa = 'Robo-Santa')
 
   rbind(anthro.positions, robo.positions)
 }
 
 visualize.b <- function(output) {
-    positions <- data.frame(x = output[,1], y = output[,2],
-                            santa = factor(output[,3], levels = c(0, 1),
-                                           labels = c('Santa', 'Robo-Santa')))
-
-  ggplot(data = positions) + 
+  ggplot(data = output) + 
     geom_point(size = 1, alpha = 1/3, aes(x = x, y = y, color = santa)) + 
     guides(color = guide_legend(override.aes = list(size = 5, alpha = 1))) +
     scale_color_manual(values = c('#C21717', '#3C8D0D')) + 
