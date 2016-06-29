@@ -9,20 +9,20 @@ will include visualizations, where appropriate (a work in progress).
 #### Day 1: Not Quite Lisp
 
 Santa's path through the apartment building:
-![santa-stairs](1.png)
+![santa-stairs](01.png)
 
 #### Day 3: Perfectly Sperical Houses in a Vacuum
 
 A heatmap of houses Santa visits:
-![santa-houses](3a.png)
+![santa-houses](03a.png)
 
 A heatmap of Santa's and Robo-Santa's visits:
-![robo-santa-houses](3b.png)
+![robo-santa-houses](03b.png)
 
 #### Day 6: Probably a Fire Hazard
 
 The winning yard, per Santa's instructions:
-![santa-toggle-lights](6a.png)
+![santa-toggle-lights](06a.png)
 
 The winning yard, per Santa's (properly translated) instructions:
-![santa-dimmer-lights](6b.png)
+![santa-dimmer-lights](06b.png)
