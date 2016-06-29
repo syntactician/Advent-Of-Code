@@ -1,26 +1,26 @@
 #!/usr/bin/env Rscript
 
+library(magrittr)
+
 side.a <- function(input) {
-  isNice <- function(str) {
+  is.nice <- function(str) {
     vowels <- '(.*[aeiou]){3}'
     substrings <- '(ab|cd|pq|xy)'
     doubleLetter <- '(.)\\1'
 
     grepl(vowels, str) & !grepl(substrings, str) & grepl(doubleLetter, str)
   }
-
-  sum(isNice(input))
+  input %>% is.nice %>% sum
 }
 
 side.b <- function(input) {
-  isNice <- function(str) {
+  is.nice <- function(str) {
     pair <- '(..).*\\1'
     repeater = '(.).\\1'
 
     grepl(pair, str, perl = TRUE) & grepl(repeater, str)
   }
-
-  sum(isNice(input))
+  input %>% is.nice %>% sum
 }
 
 main <- function() {
