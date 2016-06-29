@@ -1,13 +1,14 @@
 #!/usr/bin/env Rscript
 
 library(digest)
+library(magrittr)
 
 mine <- function(input, test) {
   length <- nchar(test)
   getHash <- function(x) {
-    substr(digest(paste0(input, x, sep = ''),
-                  algo = 'md5', serialize = FALSE),
-           length)
+    input %>% paste0(x) %>%
+      digest(algo = 'md5', serialize = FALSE) %>%
+      substr(1, length)
   }
 
   i <- 1
