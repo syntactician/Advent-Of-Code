@@ -1,8 +1,7 @@
 #!/usr/bin/env Rscript
 
-suppressMessages(library(mgcv))
-library(readr)
 library(ggplot2)
+library(readr)
 
 parse <- function(str) {
   raw.contents <- head(unlist(strsplit(str, '')), -1)
@@ -16,12 +15,12 @@ parse <- function(str) {
   do.call(rbind, contents.list)
 }
 
-side.a <- function(input) {
+mutate.a <- function(input) {
   data.frame(x = cumsum(input[,1]), y = cumsum(input[,2]))
 }
 
-visualize.a <- function(output) {
-  ggplot(data = output) +
+visualize.a <- function(a) {
+  ggplot(data = a) +
     geom_point(size = 1, alpha = 1/3, color = '#C21717',
                aes(x = x, y = y)) +
     guides(color = 'none') +
@@ -40,7 +39,7 @@ visualize.a <- function(output) {
           plot.margin = unit(c(0, 0, 0, 0), 'mm'))
 }
 
-side.b <- function(input) {
+mutate.b <- function(input) {
   anthro.input <- input[c(TRUE, FALSE),]
   robo.input <- input[c(FALSE, TRUE),]
 
@@ -54,8 +53,8 @@ side.b <- function(input) {
   rbind(anthro.positions, robo.positions)
 }
 
-visualize.b <- function(output) {
-  ggplot(data = output) + 
+visualize.b <- function(b) {
+  ggplot(data = b) + 
     geom_point(size = 1, alpha = 1/3, aes(x = x, y = y, color = santa)) + 
     guides(color = guide_legend(override.aes = list(size = 5, alpha = 1))) +
     scale_color_manual(values = c('#C21717', '#3C8D0D')) + 
@@ -82,10 +81,10 @@ main <- function() {
   contents <- read_file('../3.txt')
   input <- parse(contents)
   
-  output.a <- side.a(input)
+  a <- mutate.a(input)
   suppressMessages(ggsave('3a.png', visualize.a(output.a)))
 
-  output.b <- side.b(input)
+  b <- mutate.b(input)
   suppressMessages(ggsave('3b.png', visualize.b(output.b)))
 }
 
