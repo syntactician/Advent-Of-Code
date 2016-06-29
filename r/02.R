@@ -1,7 +1,9 @@
 #!/usr/bin/env Rscript
 
+library(magrittr)
+
 parse <- function(contents) {
-  lapply(strsplit(contents, 'x'), strtoi)
+  contents %>% strsplit('') %>% lapply(strtoi)
 }
 
 side.a <- function(input) {
@@ -9,8 +11,7 @@ side.a <- function(input) {
     d <- sort(dims)
     3 * d[1] * d[2] + 2 * d[2] * d[3] + 2 * d[3] * d[1]
   }
-
-  sum(unlist(lapply(input, wrap)))
+  input %>% lapply(wrap) %>% unlist %>% sum
 }
 
 side.b <- function(input) {
@@ -18,8 +19,7 @@ side.b <- function(input) {
     d <- sort(dims)
     prod(d) + 2 * (d[1] + d[2])
   }
-
-  sum(unlist(lapply(input, tie)))
+  input %>% lapply(tie) %>% unlist %>% sum
 }
 
 main <- function() {

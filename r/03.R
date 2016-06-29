@@ -1,5 +1,6 @@
 #!/usr/bin/env Rscript
 
+library(magrittr)
 suppressMessages(library(mgcv))
 library(readr)
 
@@ -16,7 +17,8 @@ parse <- function(str) {
 }
 
 side.a <- function(input) {
-  nrow(uniquecombs(cbind(cumsum(input[,1]), cumsum(input[,2]))))
+  positions <- cbind(cumsum(input[,1]), cumsum(input[,2]))
+  positions %>% uniquecombs %>% nrow
 }
 
 side.b <- function(input) {
@@ -26,7 +28,8 @@ side.b <- function(input) {
   anthro.positions <- cbind(cumsum(anthro.input[,1]), cumsum(anthro.input[,2]))
   robo.positions <- cbind(cumsum(robo.input[,1]), cumsum(robo.input[,2]))
 
-  nrow(uniquecombs(rbind(anthro.positions, robo.positions)))
+  all.positions <- rbind(anthro.positions, robo.positions)
+  all.positions %>% uniquecombs %>% nrow
 }
 
 main <- function() {

@@ -1,12 +1,12 @@
 #!/usr/bin/env Rscript
 
 library(ggplot2)
+library(magrittr)
 library(readr)
 
 parse <- function(str) {
-  flights <- append(ifelse(head(unlist(strsplit(str, '')), -1) == '(',
-                           1, -1),
-                    0, 0)
+  input.chars <- str %>% strsplit('') %>% unlist %>% head(-1)
+  flights <- ifelse(input.chars == '(', 1, -1) %>% append(0, 0)
   data.frame(x = 1:length(flights), y = cumsum(flights))
 }
 

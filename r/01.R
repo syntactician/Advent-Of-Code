@@ -1,15 +1,17 @@
 #!/usr/bin/env Rscript
 
+library(magrittr)
 library(readr)
 
 parse <- function(str) {
-  ifelse(head(unlist(strsplit(str, '')), -1) == '(', 1, -1)
+  input.chars <- str %>% strsplit('') %>% unlist %>% head(-1)
+  ifelse(input.chars == '(', 1, -1)
 }
 
 side.a <- sum
 
 side.b <- function(num) {
-  min(which(cumsum(num) == -1))
+  which(cumsum(num) == -1) %>% min
 }
 
 main <- function() {
