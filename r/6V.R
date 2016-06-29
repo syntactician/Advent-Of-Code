@@ -55,7 +55,7 @@ mutate.a <- function(input) {
 visualize.a <- function(a) {
   ggplot(a) +
     geom_tile(aes(x = x, y = y, fill = state)) +
-    scale_fill_manual(values = c('#C21717', '#3C8D0D')) +
+    scale_fill_manual(values = c('#3C8D0D', '#C21717')) +
     theme(axis.line = element_blank(),
           axis.text.x = element_blank(),
           axis.text.y = element_blank(),
@@ -103,7 +103,7 @@ visualize.b <- function(b) {
     geom_tile(aes(x = x, y = y, fill = brightness)) +
     scale_x_continuous() +
     scale_y_continuous() +
-    scale_fill_gradient(low = '#C21717', high = '#3C8D0D') +
+    scale_fill_gradient(low = '#3C8D0D', high = '#C21717') +
     theme(axis.line = element_blank(),
           axis.text.x = element_blank(),
           axis.text.y = element_blank(),
