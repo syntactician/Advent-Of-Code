@@ -6,6 +6,11 @@ will include visualizations, where appropriate (a work in progress).
 
 ### Visualizations
 
+#### Day 1: Not Quite Lisp
+
+Santa's path through the apartment building:
+![santa-stairs](1.png)
+
 #### Day 3: Perfectly Sperical Houses in a Vacuum
 
 A heatmap of houses Santa visits:
