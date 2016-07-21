@@ -104,7 +104,7 @@ visualize.b <- function(b) {
 }
 
 iterate.b <- function(b, i) {
-  df <- rbind(b[1:i, ], b[4097:4096+i, ])
+  df <- rbind(b[1:i, ], b[4097:(4096+i), ])
   
   g <- ggplot(data = df) +
     geom_point(size = 1, alpha = 1/3, aes(x = x, y = y, color = santa)) + 
@@ -118,7 +118,10 @@ iterate.b <- function(b, i) {
           axis.ticks = element_blank(),
           axis.title.x = element_blank(),
           axis.title.y = element_blank(),
-          legend.position = 'none',
+          legend.justification = c(1, 0),
+          legend.key = element_blank(),
+          legend.position = c(1, 0),
+          legend.title = element_blank(),
           panel.background = element_blank(),
           panel.border = element_blank(),
           panel.grid.major = element_blank(),
@@ -132,20 +135,20 @@ main <- function() {
   contents <- read_file('../3.txt')
   input <- parse(contents)
   
+  vd.opts <- '-pix_fmt yuv420p -r 30 -s:v 720x720 -profile:v high -c:v libx264'
+  
   a <- mutate.a(input)
   suppressMessages(ggsave('3a.png', visualize.a(a)))
-  suppressMessages(saveGIF({
+  suppressMessages(saveVideo({
     for (i in 1:nrow(a)) iterate.a(a, i)
-  }, interval = 0.001, movie.name = '03a.gif'))
+  }, interval = 0.0025, other.opts = vd.opts, video.name = '03a.mp4'))
 
 
   b <- mutate.b(input)
   suppressMessages(ggsave('3b.png', visualize.b(b)))
-  suppressMessages(saveGIF({
+  suppressMessages(saveVideo({
     for (i in 1:(nrow(b)/2)) iterate.b(b, i)
-  }, interval = 0.001, movie.name = '03b.gif'))
-  
-  suppressMessages(system2('gifsicle', c('-bO3', '*.gif')))
+  }, interval = 0.005, other.opts = vd.opts, video.name = '03b.mp4'))
 }
 
 main()

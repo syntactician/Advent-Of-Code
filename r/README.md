@@ -13,17 +13,11 @@ Santa's path through the apartment building:
 
 #### Day 3: Perfectly Sperical Houses in a Vacuum
 
-A heatmap of houses Santa visits:
+A heatmap of houses Santa visits (and [an animated version](03a.mp4)):
 ![santa-houses](03a.png)
 
-An animated version:  
-![santa-houses-gif](03a.gif)
-
-A heatmap of Santa's and Robo-Santa's visits:
+A heatmap of Santa's and Robo-Santa's visits (or [an animated version](03b.mp4)):
 ![robo-santa-houses](03b.png)
-
-An animated version:  
-![robo-santa-houses-gif](03b.gif)
 
 #### Day 6: Probably a Fire Hazard
 
