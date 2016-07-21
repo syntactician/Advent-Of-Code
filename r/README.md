@@ -16,13 +16,13 @@ Santa's path through the apartment building:
 A heatmap of houses Santa visits:
 ![santa-houses](03a.png)
 
-An animated version:
+An animated version:  
 ![santa-houses-gif](03a.gif)
 
 A heatmap of Santa's and Robo-Santa's visits:
 ![robo-santa-houses](03b.png)
 
-An animated version:
+An animated version:  
 ![robo-santa-houses-gif](03b.gif)
 
 #### Day 6: Probably a Fire Hazard
