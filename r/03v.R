@@ -2,10 +2,11 @@
 
 library(animation)
 library(ggplot2)
+library(magrittr)
 library(readr)
 
 parse <- function(str) {
-  raw.contents <- head(unlist(strsplit(str, '')), -1)
+  raw.contents <- str %>% strsplit('') %>% unlist %>% head(-1)
 
   n <- c(0, 1)
   e <- c(1, 0)
@@ -17,6 +18,7 @@ parse <- function(str) {
 }
 
 mutate.a <- function(input) {
+  input <- input %>% rbind(c(0, 0), .)
   data.frame(x = cumsum(input[,1]), y = cumsum(input[,2]))
 }
 
@@ -66,8 +68,8 @@ iterate.a <- function(a, i) {
 }
 
 mutate.b <- function(input) {
-  anthro.input <- input[c(TRUE, FALSE),]
-  robo.input <- input[c(FALSE, TRUE),]
+  anthro.input <- input[c(TRUE, FALSE),] %>% rbind(c(0, 0), .)
+  robo.input <- input[c(FALSE, TRUE),] %>% rbind(c(0, 0), .)
 
   anthro.positions <- data.frame(x = cumsum(anthro.input[,1]),
                                  y = cumsum(anthro.input[,2]),
@@ -104,7 +106,8 @@ visualize.b <- function(b) {
 }
 
 iterate.b <- function(b, i) {
-  df <- rbind(b[1:i, ], b[4097:(4096+i), ])
+  h <- nrow(b) / 2
+  df <- rbind(b[1:i, ], b[(h+1):(h+i), ])
   
   g <- ggplot(data = df) +
     geom_point(size = 1, alpha = 1/3, aes(x = x, y = y, color = santa)) + 
@@ -141,14 +144,14 @@ main <- function() {
   suppressMessages(ggsave('3a.png', visualize.a(a)))
   suppressMessages(saveVideo({
     for (i in 1:nrow(a)) iterate.a(a, i)
-  }, interval = 0.0025, other.opts = vd.opts, video.name = '03a.mp4'))
+  }, interval = 20/nrow(a), other.opts = vd.opts, video.name = '03a.mp4'))
 
 
   b <- mutate.b(input)
   suppressMessages(ggsave('3b.png', visualize.b(b)))
   suppressMessages(saveVideo({
     for (i in 1:(nrow(b)/2)) iterate.b(b, i)
-  }, interval = 0.005, other.opts = vd.opts, video.name = '03b.mp4'))
+  }, interval = 20/(nrow(b)/2), other.opts = vd.opts, video.name = '03b.mp4'))
 }
 
 main()
