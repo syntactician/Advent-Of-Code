@@ -16,13 +16,13 @@ Santa's path through the apartment building:
 A heatmap of houses Santa visits (or [an animated version](03a.mp4)):
 ![santa-houses](03a.png)
 
-A heatmap of Santa's and Robo-Santa's visits (or [an animated version](03b.mp4)):
+A heatmap of Santa's and Robo-Santa's visits ([animated](03b.mp4)):
 ![robo-santa-houses](03b.png)
 
 #### Day 6: Probably a Fire Hazard
 
-The winning yard, per Santa's instructions:
+The winning yard, per Santa's instructions ([animated](06a.mp4)):
 ![santa-toggle-lights](06a.png)
 
-The winning yard, per Santa's (properly translated) instructions:
+The winning yard, per Santa's (properly translated) instructions ([animated](06b.mp4)):
 ![santa-dimmer-lights](06b.png)
