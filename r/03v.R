@@ -1,5 +1,6 @@
 #!/usr/bin/env Rscript
 
+library(animation)
 library(ggplot2)
 library(readr)
 
@@ -24,7 +25,7 @@ visualize.a <- function(a) {
     geom_point(size = 1, alpha = 1/3, color = '#C21717',
                aes(x = x, y = y)) +
     guides(color = 'none') +
-    theme( axis.line = element_blank(),
+    theme(axis.line = element_blank(),
           axis.text.x = element_blank(),
           axis.text.y = element_blank(),
           axis.ticks = element_blank(),
@@ -37,6 +38,31 @@ visualize.a <- function(a) {
           panel.grid.minor = element_blank(),
           plot.background = element_blank(),
           plot.margin = unit(c(0, 0, 0, 0), 'mm'))
+}
+
+iterate.a <- function(a, i) {
+  df <- a[1:i, ]
+    
+  g <- ggplot(data = df) +
+    geom_point(size = 1, alpha = 1/3, color = '#C21717',
+               aes(x = x, y = y)) +
+    guides(color = 'none') +
+    scale_x_continuous(limits = c(-79, 38)) +
+    scale_y_continuous(limits = c(-48, 43)) +
+    theme(axis.line = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          axis.ticks = element_blank(),
+          axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+          legend.position = 'none',
+          panel.background = element_blank(),
+          panel.border = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          plot.background = element_blank(),
+          plot.margin = unit(c(0, 0, 0, 0), 'mm'))
+  print(g)
 }
 
 mutate.b <- function(input) {
@@ -59,22 +85,47 @@ visualize.b <- function(b) {
     guides(color = guide_legend(override.aes = list(size = 5, alpha = 1))) +
     scale_color_manual(values = c('#C21717', '#3C8D0D')) + 
     theme(axis.line=element_blank(),
-            axis.text.x=element_blank(),
-            axis.text.y=element_blank(),
-            axis.ticks=element_blank(),
-            axis.title.x=element_blank(),
-            axis.title.y=element_blank(),
-            legend.justification = c(1, 0),
-            legend.key = element_blank(),
-            legend.position = c(1, 0),
-            legend.title = element_blank(),
-            panel.background = element_blank(),
-            panel.background=element_blank(),
-            panel.border=element_blank(),
-            panel.grid.major=element_blank(),
-            panel.grid.minor=element_blank(),
-            plot.background=element_blank(),
-            plot.margin = unit(c(0, 0, 0, 0), 'mm'))
+          axis.text.x=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),
+          legend.justification = c(1, 0),
+          legend.key = element_blank(),
+          legend.position = c(1, 0),
+          legend.title = element_blank(),
+          panel.background = element_blank(),
+          panel.background=element_blank(),
+          panel.border=element_blank(),
+          panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),
+          plot.background=element_blank(),
+          plot.margin = unit(c(0, 0, 0, 0), 'mm'))
+}
+
+iterate.b <- function(b, i) {
+  df <- rbind(b[1:i, ], b[4097:4096+i, ])
+  
+  g <- ggplot(data = df) +
+    geom_point(size = 1, alpha = 1/3, aes(x = x, y = y, color = santa)) + 
+    guides(color = guide_legend(override.aes = list(size = 5, alpha = 1))) +
+    scale_color_manual(values = c('#C21717', '#3C8D0D')) + 
+    scale_x_continuous(limits = c(-42, 31)) +
+    scale_y_continuous(limits = c(-52, 70)) +
+    theme(axis.line = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          axis.ticks = element_blank(),
+          axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+          legend.position = 'none',
+          panel.background = element_blank(),
+          panel.border = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          plot.background = element_blank(),
+          plot.margin = unit(c(0, 0, 0, 0), 'mm'))
+  print(g)
 }
 
 main <- function() {
@@ -82,10 +133,19 @@ main <- function() {
   input <- parse(contents)
   
   a <- mutate.a(input)
-  suppressMessages(ggsave('3a.png', visualize.a(output.a)))
+  suppressMessages(ggsave('3a.png', visualize.a(a)))
+  suppressMessages(saveGIF({
+    for (i in 1:nrow(a)) iterate.a(a, i)
+  }, interval = 0.001, movie.name = '03a.gif'))
+
 
   b <- mutate.b(input)
-  suppressMessages(ggsave('3b.png', visualize.b(output.b)))
+  suppressMessages(ggsave('3b.png', visualize.b(b)))
+  suppressMessages(saveGIF({
+    for (i in 1:(nrow(b)/2)) iterate.b(b, i)
+  }, interval = 0.001, movie.name = '03b.gif'))
+  
+  suppressMessages(system2('gifsicle', c('-bO3', '*.gif')))
 }
 
 main()
