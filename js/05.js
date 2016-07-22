@@ -21,7 +21,7 @@ const sideB = (arr) => arr.filter((str) => {
 }).length
 
 const main = () => {
-  const contents = fs.readFileSync('../5.txt', 'utf8')
+  const contents = fs.readFileSync('../input/05.txt', 'utf8')
   const input = parse(contents)
   console.log(sideA(input))
   console.log(sideB(input))

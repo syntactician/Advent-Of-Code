@@ -6,11 +6,11 @@ const fs = require('fs')
 const parse = JSON.parse
 
 const sideA = (obj) => {
-  const sumNums = (x, y) => typeof (y) === 'object'
+  const sumNums = (x, y) => typeof y === 'object'
     ? Array.isArray(y)
       ? x + y.reduce(sumNums, 0)
       : x + sideA(y)
-    : typeof (y) === 'number'
+    : typeof y === 'number'
       ? x + y
       : x
 
@@ -23,13 +23,13 @@ const sideB = (obj) => {
   const objToArray = (x) => Object.keys(x)
     .map((y) => x[y])
 
-  const sumNums = (x, y) => typeof (y) === 'object'
+  const sumNums = (x, y) => typeof y === 'object'
     ? Array.isArray(y)
       ? x + y.reduce(sumNums, 0)
       : objToArray(y).every((z) => z !== 'red')
         ? x + sideB(y)
         : x
-    : typeof (y) === 'number'
+    : typeof y === 'number'
       ? x + y
       : x
 
@@ -41,7 +41,7 @@ const sideB = (obj) => {
 }
 
 const main = () => {
-  const contents = fs.readFileSync('../12.json', 'utf8')
+  const contents = fs.readFileSync('../input/12.json', 'utf8')
   const input = parse(contents)
   console.log(sideA(input))
   console.log(sideB(input))

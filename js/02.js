@@ -20,7 +20,7 @@ const sideB = (arr) => {
   return arr.reduce((x, y) => x + tie(y), 0)
 }
 const main = () => {
-  const contents = fs.readFileSync('../2.txt', 'utf8')
+  const contents = fs.readFileSync('../input/02.txt', 'utf8')
   const input = parse(contents)
   console.log(sideA(input))
   console.log(sideB(input))

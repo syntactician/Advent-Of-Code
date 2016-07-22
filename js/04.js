@@ -10,7 +10,7 @@ const mine = (input, test) => {
   const hash = (str) => md5(str).slice(0, test.length)
 
   let i = 0
-  for (; hash(input + i) !== test; ++i) {}
+  while (hash(input + i) !== test) ++i
   return i
 }
 
@@ -19,7 +19,7 @@ const sideA = (str) => mine(str, '00000')
 const sideB = (str) => mine(str, '000000')
 
 const main = () => {
-  const contents = fs.readFileSync('../4.txt', 'utf8')
+  const contents = fs.readFileSync('../input/04.txt', 'utf8')
   const input = parse(contents)
   console.log(sideA(input))
   console.log(sideB(input))

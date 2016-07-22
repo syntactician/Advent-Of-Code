@@ -54,7 +54,7 @@ const sideB = (arr) => {
 }
 
 const main = () => {
-  const contents = fs.readFileSync('../3.txt', 'utf8')
+  const contents = fs.readFileSync('../input/03.txt', 'utf8')
   const input = parse(contents)
   console.log(sideA(input))
   console.log(sideB(input))
