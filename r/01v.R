@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
 library(ggplot2)
 library(magrittr)
@@ -32,7 +32,7 @@ visualize <- function(input) {
 }
 
 main <- function() {
-  contents <- read_file('../1.txt')
+  contents <- read_file('../input/01.txt')
   input <- parse(contents)
   
   suppressMessages(ggsave('1.png', visualize(input)))

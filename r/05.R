@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
 library(magrittr)
 
@@ -24,9 +24,9 @@ side.b <- function(input) {
 }
 
 main <- function() {
-  input <- readLines('../5.txt')
-  cat(side.a(input), '\n')
-  cat(side.b(input), '\n')
+  input <- readLines('../input/05.txt')
+  input %>% side.a %>% cat('\n')
+  input %>% side.b %>% cat('\n')
 }
 
 main()

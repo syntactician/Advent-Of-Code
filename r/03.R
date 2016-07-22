@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
 library(magrittr)
 suppressMessages(library(mgcv))
@@ -33,7 +33,7 @@ side.b <- function(input) {
 }
 
 main <- function() {
-  contents <- read_file('../3.txt')
+  contents <- read_file('../input/03.txt')
   input <- parse(contents)
   cat(side.a(input), '\n')
   cat(side.b(input), '\n')

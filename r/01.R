@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
 library(magrittr)
 library(readr)
@@ -15,7 +15,7 @@ side.b <- function(num) {
 }
 
 main <- function() {
-  contents <- read_file('../1.txt')
+  contents <- read_file('../input/01.txt')
   input <- parse(contents)
   cat(side.a(input), '\n')
   cat(side.b(input), '\n')

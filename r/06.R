@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
 parse <- function(contents) {
   parseLine <- function(line) {
@@ -72,7 +72,7 @@ side.b <- function(input) {
 }
 
 main <- function() {
-    contents <- readLines('../6.txt')
+    contents <- readLines('../input/06.txt')
     input <- parse(contents)
     cat(side.a(input), '\n')
     cat(side.b(input), '\n')

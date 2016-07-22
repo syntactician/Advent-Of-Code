@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
 library(animation)
 library(ggplot2)
@@ -214,7 +214,7 @@ iterate.b <- function(input, i) {
 }
 
 main <- function() {
-  contents <- readLines('../6.txt')
+  contents <- readLines('../input/06.txt')
   input <- parse(contents)
   
   vd.opts <- '-pix_fmt yuv420p -r 30 -s:v 720x720 -profile:v high -c:v libx264'

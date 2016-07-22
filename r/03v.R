@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
 library(animation)
 library(ggplot2)
@@ -135,7 +135,7 @@ iterate.b <- function(b, i) {
 }
 
 main <- function() {
-  contents <- read_file('../3.txt')
+  contents <- read_file('../input/03.txt')
   input <- parse(contents)
   
   vd.opts <- '-pix_fmt yuv420p -r 30 -s:v 720x720 -profile:v high -c:v libx264'
@@ -145,7 +145,6 @@ main <- function() {
   suppressMessages(saveVideo({
     for (i in 1:nrow(a)) iterate.a(a, i)
   }, interval = 20/nrow(a), other.opts = vd.opts, video.name = '03a.mp4'))
-
 
   b <- mutate.b(input)
   suppressMessages(ggsave('3b.png', visualize.b(b)))
