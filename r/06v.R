@@ -195,7 +195,7 @@ iterate.b <- function(input, i) {
     geom_tile(aes(x = x, y = y, fill = brightness)) +
     scale_x_continuous() +
     scale_y_continuous() +
-    scale_fill_gradient(low = '#3C8D0D', high = '#C21717') +
+    scale_fill_gradient(limits = c(0, 49), low = '#3C8D0D', high = '#C21717') +
     theme(axis.line = element_blank(),
           axis.text.x = element_blank(),
           axis.text.y = element_blank(),
@@ -223,13 +223,13 @@ main <- function() {
   suppressMessages(ggsave('6a.png', visualize.a(a)))
   saveVideo({
     for (i in 0:nrow(input)) iterate.a(input, i)
-  }, interval = 20/300, other.opts = vd.opts, video.name = '06a.mp4')
+  }, interval = 20/nrow(input), other.opts = vd.opts, video.name = '06a.mp4')
   
   b <- mutate.b(input)
   suppressMessages(ggsave('6b.png', visualize.b(b)))
   saveVideo({
     for (i in 0:nrow(input)) iterate.b(input, i)
-  }, interval = 20/300, other.opts = vd.opts, video.name = '06b.mp4')
+  }, interval = 20/nrow(input), other.opts = vd.opts, video.name = '06b.mp4')
 }
 
 main()
