@@ -45,7 +45,7 @@ visualize.a <- function(a) {
 iterate.a <- function(a, i) {
   df <- a[1:i, ]
     
-  g <- ggplot(data = df) +
+  ggplot(data = df) +
     geom_point(size = 1, alpha = 1/3, color = '#C21717',
                aes(x = x, y = y)) +
     guides(color = 'none') +
@@ -64,7 +64,6 @@ iterate.a <- function(a, i) {
           panel.grid.minor = element_blank(),
           plot.background = element_blank(),
           plot.margin = unit(c(0, 0, 0, 0), 'mm'))
-  print(g)
 }
 
 mutate.b <- function(input) {
@@ -109,7 +108,7 @@ iterate.b <- function(b, i) {
   h <- nrow(b) / 2
   df <- rbind(b[1:i, ], b[(h+1):(h+i), ])
   
-  g <- ggplot(data = df) +
+  ggplot(data = df) +
     geom_point(size = 1, alpha = 1/3, aes(x = x, y = y, color = santa)) + 
     guides(color = guide_legend(override.aes = list(size = 5, alpha = 1))) +
     scale_color_manual(values = c('#C21717', '#3C8D0D')) + 
@@ -131,7 +130,6 @@ iterate.b <- function(b, i) {
           panel.grid.minor = element_blank(),
           plot.background = element_blank(),
           plot.margin = unit(c(0, 0, 0, 0), 'mm'))
-  print(g)
 }
 
 main <- function() {
@@ -142,15 +140,15 @@ main <- function() {
   
   a <- mutate.a(input)
   suppressMessages(ggsave('3a.png', visualize.a(a)))
-  suppressMessages(saveVideo({
-    for (i in 1:nrow(a)) iterate.a(a, i)
-  }, interval = 20/nrow(a), other.opts = vd.opts, video.name = '03a.mp4'))
+  saveVideo({
+    for (i in 1:nrow(a)) iterate.a(a, i) %>% print
+  }, interval = 20/nrow(a), other.opts = vd.opts, video.name = '03a.mp4')
 
   b <- mutate.b(input)
   suppressMessages(ggsave('3b.png', visualize.b(b)))
-  suppressMessages(saveVideo({
-    for (i in 1:(nrow(b)/2)) iterate.b(b, i)
-  }, interval = 20/(nrow(b)/2), other.opts = vd.opts, video.name = '03b.mp4'))
+  saveVideo({
+    for (i in 1:(nrow(b)/2)) iterate.b(b, i) %>% print
+  }, interval = 20/(nrow(b)/2), other.opts = vd.opts, video.name = '03b.mp4')
 }
 
 main()
