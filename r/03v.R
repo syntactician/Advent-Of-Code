@@ -23,7 +23,7 @@ mutate.a <- function(input) {
 }
 
 visualize.a <- function(a) {
-  ggplot(data = a) +
+  ggplot(a) +
     geom_point(size = 1, alpha = 1/3, color = '#C21717',
                aes(x = x, y = y)) +
     guides(color = 'none') +
@@ -45,7 +45,7 @@ visualize.a <- function(a) {
 iterate.a <- function(a, i) {
   df <- a[1:i, ]
     
-  ggplot(data = df) +
+  ggplot(df) +
     geom_point(size = 1, alpha = 1/3, color = '#C21717',
                aes(x = x, y = y)) +
     guides(color = 'none') +
@@ -81,7 +81,7 @@ mutate.b <- function(input) {
 }
 
 visualize.b <- function(b) {
-  ggplot(data = b) + 
+  ggplot(b) + 
     geom_point(size = 1, alpha = 1/3, aes(x = x, y = y, color = santa)) + 
     guides(color = guide_legend(override.aes = list(size = 5, alpha = 1))) +
     scale_color_manual(values = c('#C21717', '#3C8D0D')) + 
@@ -108,7 +108,7 @@ iterate.b <- function(b, i) {
   h <- nrow(b) / 2
   df <- rbind(b[1:i, ], b[(h+1):(h+i), ])
   
-  ggplot(data = df) +
+  ggplot(df) +
     geom_point(size = 1, alpha = 1/3, aes(x = x, y = y, color = santa)) + 
     guides(color = guide_legend(override.aes = list(size = 5, alpha = 1))) +
     scale_color_manual(values = c('#C21717', '#3C8D0D')) + 

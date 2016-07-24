@@ -97,7 +97,7 @@ iterate.a <- function(input, i) {
                    y = as.vector(col(lights)),
                    state = as.vector(lights))
   
-  g <- ggplot(df) +
+  ggplot(df) +
     geom_tile(aes(x = x, y = y, fill = state)) +
     scale_fill_manual(values = c('#3C8D0D', '#C21717')) +
     theme(axis.line = element_blank(),
@@ -113,8 +113,6 @@ iterate.a <- function(input, i) {
           panel.grid.minor = element_blank(),
           plot.background = element_blank(),
           plot.margin = unit(c(0, 0, 0, 0), 'mm'))
-  
-  print(g)
 }
 
 mutate.b <- function(input) {
@@ -191,7 +189,7 @@ iterate.b <- function(input, i) {
                    y = as.vector(col(lights)),
                    brightness = as.vector(lights))
   
-  g <- ggplot(df) +
+  ggplot(df) +
     geom_tile(aes(x = x, y = y, fill = brightness)) +
     scale_x_continuous() +
     scale_y_continuous() +
@@ -209,8 +207,6 @@ iterate.b <- function(input, i) {
           panel.grid.minor = element_blank(),
           plot.background = element_blank(),
           plot.margin = unit(c(0, 0, 0, 0), 'mm'))
-  
-  print(g)
 }
 
 main <- function() {
@@ -222,13 +218,13 @@ main <- function() {
   a <- mutate.a(input)
   suppressMessages(ggsave('6a.png', visualize.a(a)))
   saveVideo({
-    for (i in 0:nrow(input)) iterate.a(input, i)
+    for (i in 0:nrow(input)) iterate.a(input, i) %>% print
   }, interval = 20/nrow(input), other.opts = vd.opts, video.name = '06a.mp4')
   
   b <- mutate.b(input)
   suppressMessages(ggsave('6b.png', visualize.b(b)))
   saveVideo({
-    for (i in 0:nrow(input)) iterate.b(input, i)
+    for (i in 0:nrow(input)) iterate.b(input, i) %>% print
   }, interval = 20/nrow(input), other.opts = vd.opts, video.name = '06b.mp4')
 }
 

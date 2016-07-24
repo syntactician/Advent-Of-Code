@@ -11,7 +11,7 @@ parse <- function(str) {
 }
 
 visualize <- function(input) {
-  ggplot(data = input) +
+  ggplot(input) +
     geom_hline(yintercept = 0, color = '#3C8D0D', alpha = 1/3) +
     annotate('rect', xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = 0, 
              fill = '#3C8D0D', alpha = 1/3) +
