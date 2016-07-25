@@ -18,30 +18,11 @@ const parse = (str) => str
     return x
   }, {})
 
-const sideA = (obj) => {
+const solve = (obj) => {
   const cities = Object.keys(obj)
   const paths = Combinatorics.permutation(cities)
 
   let least = Number.MAX_VALUE
-
-  for (let i = 0; i < paths.length; ++i) {
-    const path = paths.next()
-    let d = 0
-
-    for (let j = 0; j < path.length - 1; ++j) {
-      d += obj[path[j]][path[j + 1]]
-    }
-
-    if (d < least) least = d
-  }
-
-  return least
-}
-
-const sideB = (obj) => {
-  const cities = Object.keys(obj)
-  const paths = Combinatorics.permutation(cities)
-
   let longest = Number.MIN_VALUE
 
   for (let i = 0; i < paths.length; ++i) {
@@ -52,17 +33,19 @@ const sideB = (obj) => {
       d += obj[path[j]][path[j + 1]]
     }
 
+    if (d < least) least = d
     if (d > longest) longest = d
   }
 
-  return longest
+  return [least, longest]
 }
 
 const main = () => {
   const contents = fs.readFileSync('../input/09.txt', 'utf8')
   const input = parse(contents)
-  console.log(sideA(input))
-  console.log(sideB(input))
+  const solutions = solve(input)
+  console.log(solutions[0])
+  console.log(solutions[1])
 }
 
 main()
