@@ -5,18 +5,18 @@ const fs = require('fs')
 
 const parse = (str) => str
   .split('')
-  .map((c) => c === '(' ? 1 : c === ')' ? -1 : 0)
+  .filter((x) => x !== '\n')
+  .map((c) => c === '(' ? 1 : -1)
 
 const sideA = (arr) => arr
   .reduce((a, b) => a + b)
 
-const sideB = (arr) => {
-  for (let floor = 0, i = 0; i < arr.length; floor += arr[i], ++i) {
-    if (floor < 0) {
-      return i
-    }
-  }
-}
+const sideB = (arr) => arr
+  .reduce((r, c, i) => {
+    r.push((r[i - 1] || 0) + c)
+    return r
+  }, [])
+  .indexOf(-1)
 
 const main = () => {
   const contents = fs.readFileSync('../input/01.txt', 'utf8')
