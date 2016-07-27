@@ -3,7 +3,8 @@
 
 const fs = require('fs')
 
-const parse = (str) => str.split('\n')
+const parse = (str) => str
+  .split('\n')
   .filter(w => w.length > 0)
   .map((x) => x
     .split('x')
