@@ -5,51 +5,32 @@ const fs = require('fs')
 
 const parse = (str) => str
   .split('')
-  .map((x) => {
-    switch (x) {
-      case '^':
-        return [0, 1]
-      case '>':
-        return [1, 0]
-      case 'v':
-        return [0, -1]
-      case '<':
-        return [-1, 0]
-      default:
-        return [0, 0]
-    }
-  })
+  .filter((x) => x !== '\n')
+  .map((x) => ({
+    '^': [0, 1],
+    '>': [1, 0],
+    'v': [0, -1],
+    '<': [-1, 0]
+  }[x]))
 
 const sideA = (arr) => {
+  let p = [0, 0]
   let positions = {'0,0': 1}
 
-  for (let i = 0, position = [0, 0]; i < arr.length; ++i) {
-    position[0] += arr[i][0]
-    position[1] += arr[i][1]
-
-    positions[position] = true
+  for (let i = 0; i < arr.length; ++i) {
+    for (let j = 0; j < 2; ++j) p[j] += arr[i][j]
+    positions[p] = true
   }
   return Object.keys(positions).length
 }
 
 const sideB = (arr) => {
+  let p = [[0, 0], [0, 0]]
   let positions = {'0,0': 1}
 
-  let anthroPosition = [0, 0]
-  let roboPosition = [0, 0]
-
   for (let i = 0; i < arr.length; ++i) {
-    if (i % 2) {
-      roboPosition[0] += arr[i][0]
-      roboPosition[1] += arr[i][1]
-
-      positions[roboPosition] = true
-    } else {
-      anthroPosition[0] += arr[i][0]
-      anthroPosition[1] += arr[i][1]
-
-      positions[anthroPosition] = true
-    }
+    for (let j = 0; j < 2; ++j) p[i % 2][j] += arr[i][j]
+    positions[p[i % 2]] = true
   }
   return Object.keys(positions).length
 }
