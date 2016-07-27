@@ -3,7 +3,8 @@
 
 const fs = require('fs')
 
-const parse = (str) => str.split('')
+const parse = (str) => str
+  .split('')
   .map((x) => {
     switch (x) {
       case '^':
