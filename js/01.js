@@ -23,7 +23,6 @@ const main = () => {
   const input = parse(contents)
   console.log(sideA(input))
   console.log(sideB(input))
-  return
 }
 
 main()
