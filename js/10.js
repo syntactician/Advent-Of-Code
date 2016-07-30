@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 'use strict'
 
+const fs = require('fs')
+
 const rle = (str) => str
   .replace(/(.)\1*/g, (seq, pl) => seq.length.toString() + pl)
 
@@ -21,7 +23,7 @@ const sideB = (str) => {
 }
 
 const main = () => {
-  const input = '3113322113'
+  const input = fs.readFileSync('../input/10.txt', 'utf8').trim()
   console.log(sideA(input))
   console.log(sideB(input))
 }

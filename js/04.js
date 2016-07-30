@@ -4,7 +4,7 @@
 const md5 = require('md5')
 const fs = require('fs')
 
-const parse = (str) => str.slice(0, -1)
+const parse = (str) => str.trim()
 
 const mine = (input, test) => {
   const hash = (str) => md5(str).slice(0, test.length)

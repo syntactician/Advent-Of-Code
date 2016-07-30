@@ -4,8 +4,8 @@
 const fs = require('fs')
 
 const parse = (str) => str
+  .trim()
   .split('')
-  .filter((x) => x !== '\n')
   .map((x) => ({
     '^': [0, 1],
     '>': [1, 0],
