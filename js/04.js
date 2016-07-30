@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 'use strict'
 
-const md5 = require('md5')
 const fs = require('fs')
+const md5 = require('md5')
 
 const mine = (input, test) => {
   const hash = (str) => md5(str).slice(0, test.length)
@@ -20,7 +20,6 @@ const main = () => {
   const input = fs.readFileSync('../input/04.txt', 'utf8').trim()
   console.log(sideA(input))
   console.log(sideB(input))
-  return
 }
 
 main()
