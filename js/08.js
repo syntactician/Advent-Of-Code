@@ -4,8 +4,8 @@
 const fs = require('fs')
 
 const parse = (str) => str
+  .trim()
   .split('\n')
-  .filter((x) => x.length > 0)
 
 const sideA = (arr) => arr
   .reduce((sum, str) => sum + str.length - eval(str).length, 0)

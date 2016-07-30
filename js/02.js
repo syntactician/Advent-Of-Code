@@ -4,8 +4,8 @@
 const fs = require('fs')
 
 const parse = (str) => str
+  .trim()
   .split('\n')
-  .filter(w => w.length > 0)
   .map((x) => x
     .split('x')
     .map(x => parseInt(x, 10))

@@ -3,7 +3,9 @@
 
 const fs = require('fs')
 
-const parse = (str) => str.split('\n')
+const parse = (str) => str
+  .trim()
+  .split('\n')
 
 const sideA = (arr) => arr.filter((str) => {
   const vowels = /(.*[aeiou]){3}/

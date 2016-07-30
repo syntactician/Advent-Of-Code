@@ -5,8 +5,8 @@ const Combinatorics = require('js-combinatorics')
 const fs = require('fs')
 
 const parse = (str) => str
+  .trim()
   .split('\n')
-  .filter((x) => x.length > 0)
   .map((x) => x.split(/ to | = /))
   .reduce((x, y) => {
     for (let j = 0; j < 2; ++j) {
