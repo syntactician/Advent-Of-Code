@@ -13,27 +13,21 @@ const parse = (str) => str
     '<': [-1, 0]
   }[x]))
 
-const sideA = (arr) => {
-  let p = [0, 0]
-  let positions = {'0,0': 1}
+const sideA = (arr) => Object.keys(arr
+    .reduce((r, c) => {
+      for (let i = 0; i < 2; ++i) r.curr[i] += c[i]
+      r[r.curr] = true
+      return r
+    }, { curr: [0, 0] }))
+    .length - 1
 
-  for (let i = 0; i < arr.length; ++i) {
-    for (let j = 0; j < 2; ++j) p[j] += arr[i][j]
-    positions[p] = true
-  }
-  return Object.keys(positions).length
-}
-
-const sideB = (arr) => {
-  let p = [[0, 0], [0, 0]]
-  let positions = {'0,0': 1}
-
-  for (let i = 0; i < arr.length; ++i) {
-    for (let j = 0; j < 2; ++j) p[i % 2][j] += arr[i][j]
-    positions[p[i % 2]] = true
-  }
-  return Object.keys(positions).length
-}
+const sideB = (arr) => Object.keys(arr
+    .reduce((r, c, i) => {
+      for (let j = 0; j < 2; ++j) r[i % 2][j] += c[j]
+      r[r[i % 2]] = true
+      return r
+    }, { 0: [0, 0], 1: [0, 0] }))
+    .length - 2
 
 const main = () => {
   const contents = fs.readFileSync('../input/03.txt', 'utf8')
