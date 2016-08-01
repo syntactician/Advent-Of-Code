@@ -21,7 +21,7 @@ const sideA = (arr) => arr
 const sideB = (arr) => arr
   .reduce((x, y) => x +
     2 * (y[0] + y[1]) +
-    y.reduce((x, y) => x * y, 1)
+    y.reduce((x, y) => x * y)
     , 0)
 
 const main = () => {
