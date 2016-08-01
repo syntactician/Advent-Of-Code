@@ -26,7 +26,7 @@ const sideA = (arr) => {
     for (let x = instruction.start.x; x <= instruction.end.x; ++x) {
       for (let y = instruction.start.y; y <= instruction.end.y; ++y) {
         if (grid[x] === undefined) grid[x] = []
-        // if (grid[x][y] === undefined) grid[x][y] = false
+        if (grid[x][y] === undefined) grid[x][y] = false
         switch (instruction.action) {
           case 'turn on':
             grid[x][y] = true
@@ -35,7 +35,7 @@ const sideA = (arr) => {
             grid[x][y] = false
             break
           case 'toggle':
-            grid[x][y] = grid[x][y] ? !grid[x][y] : true
+            grid[x][y] = !grid[x][y]
             break
         }
       }
