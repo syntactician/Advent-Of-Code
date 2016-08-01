@@ -9,7 +9,7 @@ const parse = (str) => str
   .map((c) => c === '(' ? 1 : -1)
 
 const sideA = (arr) => arr
-  .reduce((a, b) => a + b)
+  .reduce((x, y) => x + y)
 
 const sideB = (arr) => arr
   .reduce((r, c, i) => {
