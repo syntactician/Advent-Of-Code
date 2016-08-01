@@ -21,57 +21,51 @@ const parse = (str) => str
     }
   })
 
-const sideA = (arr) => {
-  const followInstruction = (grid, instruction) => {
-    for (let x = instruction.start.x; x <= instruction.end.x; ++x) {
-      for (let y = instruction.start.y; y <= instruction.end.y; ++y) {
-        if (grid[x] === undefined) grid[x] = []
-        if (grid[x][y] === undefined) grid[x][y] = false
-        switch (instruction.action) {
+const sideA = (arr) => arr
+  .reduce((r, c) => {
+    for (let x = c.start.x; x <= c.end.x; ++x) {
+      for (let y = c.start.y; y <= c.end.y; ++y) {
+        if (r[x] === undefined) r[x] = []
+        if (r[x][y] === undefined) r[x][y] = false
+        switch (c.action) {
           case 'turn on':
-            grid[x][y] = true
+            r[x][y] = true
             break
           case 'turn off':
-            grid[x][y] = false
+            r[x][y] = false
             break
           case 'toggle':
-            grid[x][y] = !grid[x][y]
+            r[x][y] = !r[x][y]
             break
         }
       }
     }
-    return grid
-  }
+    return r
+  }, [])
+  .reduce((r, c) => r + c.filter((x) => x).length, 0)
 
-  return arr.reduce(followInstruction, [])
-    .reduce((count, row) => count + row.filter(x => x).length, 0)
-}
-
-const sideB = (arr) => {
-  const followInstruction = (grid, instruction) => {
-    for (let x = instruction.start.x; x <= instruction.end.x; ++x) {
-      for (let y = instruction.start.y; y <= instruction.end.y; ++y) {
-        if (grid[x] === undefined) grid[x] = []
-        if (grid[x][y] === undefined) grid[x][y] = 0
-        switch (instruction.action) {
+const sideB = (arr) => arr
+  .reduce((r, c) => {
+    for (let x = c.start.x; x <= c.end.x; ++x) {
+      for (let y = c.start.y; y <= c.end.y; ++y) {
+        if (r[x] === undefined) r[x] = []
+        if (r[x][y] === undefined) r[x][y] = 0
+        switch (c.action) {
           case 'turn on':
-            grid[x][y] = grid[x][y] + 1
+            r[x][y] = r[x][y] + 1
             break
           case 'turn off':
-            grid[x][y] = grid[x][y] > 0 ? grid[x][y] - 1 : 0
+            r[x][y] = r[x][y] > 0 ? r[x][y] - 1 : 0
             break
           case 'toggle':
-            grid[x][y] = grid[x][y] + 2
+            r[x][y] = r[x][y] + 2
             break
         }
       }
     }
-    return grid
-  }
-
-  return arr.reduce(followInstruction, [])
-    .reduce((sum, row) => sum + row.reduce((a, b) => a + (b || 0)), 0)
-}
+    return r
+  }, [])
+  .reduce((r, c) => r + c.reduce((x, y) => x + (y || 0)), 0)
 
 const main = () => {
   const contents = fs.readFileSync('../input/06.txt', 'utf8')
