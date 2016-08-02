@@ -139,13 +139,13 @@ main <- function() {
   vd.opts <- '-pix_fmt yuv420p -r 30 -s:v 720x720 -profile:v high -c:v libx264'
   
   a <- mutate.a(input)
-  suppressMessages(ggsave('3a.png', visualize.a(a)))
+  suppressMessages(ggsave('03a.png', visualize.a(a)))
   saveVideo({
     for (i in 1:nrow(a)) iterate.a(a, i) %>% print
   }, interval = 20/nrow(a), other.opts = vd.opts, video.name = '03a.mp4')
 
   b <- mutate.b(input)
-  suppressMessages(ggsave('3b.png', visualize.b(b)))
+  suppressMessages(ggsave('03b.png', visualize.b(b)))
   saveVideo({
     for (i in 1:(nrow(b)/2)) iterate.b(b, i) %>% print
   }, interval = 20/(nrow(b)/2), other.opts = vd.opts, video.name = '03b.mp4')
