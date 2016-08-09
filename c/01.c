@@ -12,7 +12,6 @@ int main(void) {
 	{
 		++count;
 
-		// assuming no invalid characters
 		(c == '(') ? ++floor : (c == ')') ? --floor : floor ;
 
 		if (!basement && floor == -1) 
