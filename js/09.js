@@ -43,9 +43,9 @@ const solve = (obj) => {
 const main = () => {
   const contents = fs.readFileSync('../input/09.txt', 'utf8')
   const input = parse(contents)
-  const solutions = solve(input)
-  console.log(solutions[0])
-  console.log(solutions[1])
+  const [a, b] = solve(input)
+  console.log(a)
+  console.log(b)
 }
 
 main()
