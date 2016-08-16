@@ -21,32 +21,24 @@ const parse = (str) => str
   .split('\n')
   .map((x) => {
     const c = x.match(/(\d+|\w+(?=:))/g)
-    let r = {'n': c[0]}
+    let r = {}
     for (let i = 1; i < c.length; i += 2) {
       r[c[i]] = parseInt(c[i + 1], 10)
     }
     return r
   })
 
-const sideA = (arr) => arr
-  .filter((x) => Object.keys(x)
-    .every((y) => y === 'n'
-      ? true
-      : x[y] === clue[y]))
-  .map((x) => x.n)
-  .toString()
+const sideA = (arr) => 1 + arr
+    .findIndex((x) => Object.keys(x)
+      .every((y) => x[y] === clue[y]))
 
-const sideB = (arr) => arr
-  .filter((x) => Object.keys(x)
-    .every((y) => y === 'n'
-      ? true
-      : y === 'cats' || y === 'trees'
+const sideB = (arr) => 1 + arr
+    .findIndex((x) => Object.keys(x)
+      .every((y) => y == 'cats' || y === 'trees'
         ? x[y] > clue[y]
         : y === 'pomeranians' || y === 'goldfish'
           ? x[y] < clue[y]
           : x[y] === clue[y]))
-  .map((x) => x.n)
-  .toString()
 
 const main = () => {
   const contents = fs.readFileSync('../input/16.txt', 'utf8')
