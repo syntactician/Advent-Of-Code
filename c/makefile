@@ -1,7 +1,12 @@
 CC := gcc
-CFLAGS := -O3 -Wall -lcrypto -lssl -pedantic -std=c99
+CPPFLAGS += -D_XOPEN_SOURCE=700
+CFLAGS += -std=c99 -pedantic -Wall -Wextra -Os
+LDFLAGS += -lcrypto
 
-all: 01 04 05
+SRC := 01.c 02.c 03.c 04.c 05.c
+OBJ := ${SRC:.c=}
+
+all: ${OBJ}
 
 clean:
-	@rm -f 01 04 05
+	@rm -f ${OBJ}
