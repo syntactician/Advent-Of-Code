@@ -14,9 +14,14 @@ main(void)
 	while ((c = fgetc(fp)) != EOF) {
 		++count;
 
-		(c == '(') ? ++floor : (c == ')') ? --floor : floor ;
+		if (c == '(')
+			++floor;
+		else if (c == ')')
+			--floor;
+		else
+			break;
 
-		if (!basement && floor == -1) 
+		if (!basement && floor < 0) 
 			basement = count;
 	}
 
